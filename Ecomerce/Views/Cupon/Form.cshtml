@@ -1,0 +1,70 @@
+﻿@using Ecomerce.DTO;
+@model CuponDTO
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--
+<h2>Form</h2>
+    -->
+@using (Html.BeginForm("Form", "Cupon", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    @Html.HiddenFor(model => Model.IdCupon)
+    <h2>Datos Personales</h2>
+    <div class=" d-flex justify-content-end mb-4">
+        <button class="btn btn-primary" type="submit" onclick="regresar()">
+            Regresar
+        </button>
+    </div>
+    <div class="d-flex flex-row mb-3">
+        <div class="col-4">
+            @Html.LabelFor(model => Model.Codigo, new { @class = "form-label" })
+            @Html.TextBoxFor(model => Model.Codigo, new
+                {
+                    @class = "form-control"
+                })
+        </div>
+        <div class="col-4">
+            @Html.LabelFor(model => Model.Descuento, new { @class = "form-label" })
+            @Html.TextBoxFor(model => Model.Descuento, new
+                {
+                    @class = "form-control"
+                })
+        </div>
+        <div class="col-4">
+            @Html.LabelFor(model => Model.CantidadMinima, new { @class = "form-label" })
+            @Html.TextBoxFor(model => Model.CantidadMinima, new
+                {
+                    @class = "form-control"
+                })
+        </div>
+    </div>
+    <script type="text/javascript">
+        function regresar() {
+            window.history.back();
+        }
+    </script>
+
+
+
+    //Button
+    <div class="mb-4">
+        <button class="btn btn-primary" type="submit">
+            Guardar
+            @if (TempData["notificacion"] != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        var message = '@TempData["notificacion"]';
+                        alert(message);
+                    };
+                    window.location = "@Url.Action("GetAll", "Usuario")";
+                </script>
+            }
+        </button>
+    </div>
+}
+
